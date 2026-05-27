@@ -167,7 +167,7 @@ exports.login = async (req, res) => {
                 department: user.department
             },
 
-            "SECRET_KEY",
+            process.env.JWT_SECRET,
             {
                 expiresIn: "1d"
             }
