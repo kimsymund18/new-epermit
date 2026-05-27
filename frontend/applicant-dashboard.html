@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Applicant Dashboard</title>
+    <link rel="stylesheet" href="css/applicant-dashboard.css">
+</head>
+
+<body>
+<!-- TOPBAR -->
+<header class="topbar">
+    <div class="logo">
+        <img src="assets/cclguicon.png" height="40">
+        <span>BuildBillEase - Caloocan e-Permit</span>
+    </div>
+</header>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-inner">
+
+            <!-- PROFILE -->
+            <div class="profile">
+
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+                <div class="profile-info">
+
+                    <h3 id="userName">
+                        Applicant Name
+                    </h3>
+
+                    <small id="userDepartment">
+                        Applicant
+                    </small>
+
+                    <div class="role">
+
+                        <div class="role-btn" onclick="toggleDropdown(event)">
+                            <span id="userRole">
+                                Applicant
+                            </span> ▼
+                        </div>
+
+                        <div id="dropdownMenu" class="dropdown">
+                            <p onclick="editProfile()">Edit Profile</p>
+                            <p onclick="logout()">Sign Out</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- MENU -->
+            <ul class="sidebar-menu">
+                <li id="btnDashboard">🏠 Dashboard</li>
+                <li id="btnPermits">📋 My Applications</li>
+                <li id="btnApply">📄 Requirements</li>
+                <li id="btnHistory">📁 Application History</li>
+            </ul>
+
+        </div>
+    </aside>
+    
+    <!-- CONTENT -->
+    <main class="content">
+        <!-- DASHBOARD -->
+        <section id="dashboardSection">
+            <h2>Services</h2>
+            
+            <div class="card-container">
+
+                <!-- CARD 1 -->
+                <div class="service-card"
+                    onclick="openServiceModal('Zoning Clearance')">
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Zoning Clearance">
+                    <h3>Zoning Clearance</h3>
+                    <span>Apply Now</span>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="service-card"
+                    onclick="openServiceModal('Fire Safety Evaluation Clearance')">
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/785/785116.png" alt="Fire Safety Evaluation Clearance">
+                    <h3>Fire Safety Evaluation Clearance</h3>
+                    <span>Apply Now</span>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="service-card"
+                    onclick="openServiceModal('Building Permit')">
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" alt="Building Permit">
+                    <h3>Building Permit</h3>
+                    <span>Apply Now</span>
+                </div>
+
+            </div>
+
+            <!-- ACTIVITY LOG -->
+            <div class="activity-section">
+
+                <div class="section-header">
+                    <div>
+                        <h3>Recent Activity</h3>
+                        <p>Latest updates on your applications</p>
+                    </div>
+                </div>
+
+                <div id="activityLog" class="activity-list">
+
+                    <!-- JS WILL RENDER -->
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MY APPLICATIONS -->
+        <section id="myApplicationsSection">
+            <h2>My Applications</h2>
+
+            <!-- STATS CARDS -->
+            <div class="stats-wrapper">
+
+                <!-- ROW 1 -->
+                <div class="stats-row top-row">
+
+                    <div class="stat-card total-apps">
+                        <h4>Total Applications</h4>
+                        <p id="totalApplications">0</p>
+                    </div>
+
+                    <div class="stat-card building">
+                        <h4>Total Building Permit</h4>
+                        <p id="totalBuildingPermit">0</p>
+                    </div>
+
+                    <div class="stat-card zoning">
+                        <h4>Total Zoning Clearance</h4>
+                        <p id="totalZoningClearance">0</p>
+                    </div>
+
+                    <div class="stat-card fsec">
+                        <h4>Total Fire Safety Evaluation Clearance</h4>
+                        <p id="totalFSEC">0</p>
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="stats-row bottom-row">
+
+                    <div class="stat-card pending">
+                        <h4>Pending</h4>
+                        <p id="pendingApplications">0</p>
+                    </div>
+
+                    <div class="stat-card underReview">
+                        <h4>Under Review</h4>
+                        <p id="underReviewApplications">0</p>
+                    </div>
+
+                    <div class="stat-card inspections">
+                        <h4>For Inspection</h4>
+                        <p id="inspectionsApplications">0</p>
+                    </div>
+
+                    <div class="stat-card payment">
+                        <h4>For Payment</h4>
+                        <p id="paymentApplications">0</p>
+                    </div>
+
+                    <div class="stat-card approved">
+                        <h4>Approved</h4>
+                        <p id="approvedApplications">0</p>
+                    </div>
+
+                    <div class="stat-card rejected">
+                        <h4>Rejected</h4>
+                        <p id="rejectedApplications">0</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TABLE HEADER -->
+            <div class="table-header">
+
+                <!-- TOP -->
+                <div class="table-header-top">
+
+                    <div>
+                        <h3>Application Records</h3>
+                        <p>Track and manage your permit applications</p>
+                    </div>
+
+                    <div class="results-count">
+                        <span id="resultsCount">0 Applications</span>
+                    </div>
+
+                </div>
+
+                <!-- TOOLBAR -->
+                <div class="table-toolbar">
+
+                    <!-- SEARCH -->
+                    <div class="search-box">
+                        <span>🔍</span>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search applications..."
+                        >
+                    </div>
+
+                    <!-- FILTERS -->
+                    <select id="statusFilter">
+                        <option value="">Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Under Review">Under Review</option>
+                        <option value="For Inspection">For Inspection</option>
+                        <option value="For Payment">For Payment</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+
+                    <select id="permitFilter">
+                        <option value="">Permit Type</option>
+                        <option value="Building Permit">Building Permit</option>
+                        <option value="Zoning Clearance">Zoning Clearance</option>
+                        <option value="Fire Safety Evaluation Clearance">
+                            Fire Safety
+                        </option>
+                    </select>
+
+                    <select id="sortBy">
+                        <option value="latest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                        <option value="status">Status</option>
+                        <option value="permit">Permit Type</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>TRANSACTION CODE</th>
+                            <th>PERMIT TYPE</th>
+                            <th>PROJECT TITLE</th>
+                            <th>DATE SUBMITTED</th>
+                            <th>REVIEWER</th>
+                            <th>APPLICATION STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="permitTable"></tbody>
+                </table>
+
+                <!-- EMPTY STATE -->
+                <div id="emptyState" style="display:none; text-align:center; padding:30px;">
+                    <h3>📂 No Applications Yet</h3>
+                    <p>Start by submitting your first permit application.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- NEW APPLICATIONS -->
+        <section id="requirementsSection">
+            <h2>Apply for Permit</h2>
+
+            <div class="permit-layout">
+
+                <!-- LEFT: FORM -->
+                <div class="form-panel">
+                    <form id="permitForm" onsubmit="return false">
+
+                        <select id="permit_type"
+                                onchange="renderRequirements()"
+                                required>
+                            <option value="">-- Select Permit Type --</option>
+                            <option value="Zoning Clearance">Zoning Clearance</option>
+                            <option value="Fire Safety Evaluation Clearance">Fire Safety Evaluation Clearance</option>
+                            <option value="Building Permit">Building Permit</option>
+                        </select>
+
+                        <div id="dynamicForm"></div>                   
+
+                    </form>
+                </div>
+
+                <!-- RIGHT: REQUIREMENTS PANEL -->
+                <div class="requirements-panel">
+
+                    <h3>📄 Required Documents</h3>
+                    <p id="reqPlaceholder">Select a permit type to view requirements</p>
+                    <ul id="requirementsList"></ul>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- APPLICATION HISTORY -->
+        <section id="historySection" style="display:none;">
+            <h2>Application History</h2>
+
+            <div class="stats-wrapper">
+                <div class="stats-row top-row">
+                    <div class="stat-card total-apps">
+                        <h4>Total Completed</h4>
+                        <p id="historyTotal">0</p>
+                    </div>
+                    <div class="stat-card approved">
+                        <h4>Approved</h4>
+                        <p id="historyApproved">0</p>
+                    </div>
+                    <div class="stat-card rejected">
+                        <h4>Rejected</h4>
+                        <p id="historyRejected">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-header">
+                <div class="table-header-top">
+                    <div>
+                        <h3>Completed Applications</h3>
+                        <p>All approved and rejected permit applications</p>
+                    </div>
+                    <div class="results-count">
+                        <span id="historyCount">0 Records</span>
+                    </div>
+                </div>
+                <div class="table-toolbar">
+                    <div class="search-box">
+                        <span>🔍</span>
+                        <input type="text" id="historySearch" placeholder="Search records...">
+                    </div>
+                    <select id="historyResultFilter">
+                        <option value="">Result</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                    <select id="historyPermitFilter">
+                        <option value="">Permit Type</option>
+                        <option value="Building Permit">Building Permit</option>
+                        <option value="Zoning Clearance">Zoning Clearance</option>
+                        <option value="Fire Safety Evaluation Clearance">Fire Safety</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CONTROL NUMBER</th>
+                            <th>PERMIT TYPE</th>
+                            <th>PROJECT TITLE</th>
+                            <th>DATE SUBMITTED</th>
+                            <th>DATE OF COMPLETION</th>
+                            <th>REVIEWER</th>
+                            <th>RESULT</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTable"></tbody>
+                </table>
+                <div id="historyEmpty" class="empty-state" style="display:none; text-align:center; padding:30px;">
+                    <h3>📂 No Completed Applications Yet</h3>
+                    <p>Approved and rejected applications will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- REMARKS MODAL -->
+        <div id="remarksModal" class="modal" style="display:none;">
+            <div class="modal-content">
+
+                <span class="close" onclick="closeRemarksModal()">&times;</span>
+
+                <h2 id="remarksTitle">Application Status</h2>
+                <p id="remarksMessage"></p>
+
+                <div id="remarksAction" style="margin-top:20px;"></div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- FORM INSIDE MODAL -->
+<div id="editApplicationModal" class="modal">
+    <div class="modal-content large-modal">
+
+        <span class="close" onclick="closeEditModal()">&times;</span>
+
+        <!-- HEADER -->
+        <div class="modal-header">
+            <h2>Application Details</h2>
+            <span id="modalStatusBadge" class="status-badge">Pending</span>
+            
+            <div class="edit-controls">
+
+                <button type="button" id="editBtn" onclick="toggleEditMode()" class="secondary-btn">
+                    Edit Application
+                </button>
+
+                <button id="resubmitEditBtn" class="secondary-btn">
+                    Edit Resubmission
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- VIEW / EDIT TOGGLE WRAPPER -->
+        <div id="editApplicationForm">
+
+            <div class="modal-section" data-section="permitInfo">
+                <h3>📌 Permit Information</h3>
+
+                <div class="info-grid">
+
+                    <div class="field">
+                        <label>Permit Type</label>
+                        <div id="view_permit_type" class="static-value"></div>
+                    </div>
+
+                    <div class="field">
+                        <label>Control Number</label>
+                        <div id="view_control_number" class="static-value"></div>
+                    </div>
+
+                    <div class="field">
+                        <label>Applicant Name</label>
+                        <div id="view_applicant_name" class="static-value"></div>
+                    </div>
+
+                    <div class="field">
+                        <label>Contact Number</label>
+                        <div id="view_contact_number" class="static-value"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- INFORMATION -->
+            <div class="modal-section" id="informationSection" data-section="permitDetails">
+                <h3>
+                    📄 Permit Details
+                    <span id="badge_permitDetails"></span>
+                </h3>
+                
+                <div class="info-grid">
+                    <div class="field">
+                        <label>Project Title</label>
+                        <div id="view_project_title" class="static-value"></div>
+                        <input id="edit_project_title" name="project_title" type="text" style="display:none;">
+                    </div>
+
+                    <div class="field">
+                        <label>Location</label>
+                        <div id="view_project_location" class="static-value"></div>
+                        <input id="edit_project_location" name="project_location" type="text" style="display:none;">
+                    </div>
+
+                    <div class="field">
+                        <label>Estimated Cost</label>
+                        <div id="view_estimated_cost" class="static-value"></div>
+                        <input id="edit_estimated_cost" name="estimated_cost" type="text" style="display:none;">
+                    </div>
+
+                    <div class="field">
+                        <label>Owner Name</label>
+                        <div id="view_owner_name" class="static-value"></div>
+                        <input id="edit_owner_name" name="owner_name" type="text" style="display:none;">
+                    </div>
+                </div>
+                <div id="remarks_permitDetails" class="section-remarks" style="display:none;"></div>
+            </div>
+
+            <!-- PERMIT DETAILS -->
+            <div class="modal-section" id="DetailsSection" data-section="dynamicDetails">
+                <h3 id="detailsTitle">
+                    📄 Details
+                    <span id="badge_dynamicDetails"></span>
+                </h3>
+                
+                <div id="editDynamicForm" class="info-grid"></div>
+                <div id="remarks_dynamicDetails" class="section-remarks" style="display:none;"></div>
+            </div>
+
+            <!-- DOCUMENTS -->
+            <div class="modal-section" data-section="documents">
+                <h3>
+                    📎 Documents
+                    <span id="badge_documents"></span>
+                </h3>
+                
+                <div id="documentsContainer">
+                    <!-- JS will render here -->
+                </div>
+
+                <div id="remarks_documents" class="section-remarks" style="display:none;"></div>
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="modal-actions">
+
+                <button type="button" id="saveBtn" class="primary-btn" style="display:none;">
+                    Save Changes
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- SERVICE MODAL -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content permit-modal">
+            <span class="close" onclick="closeServiceModal()">&times;</span>
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalDescription"></p>
+                </div>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+<!-- PERMIT DETAILS MODAL -->
+<div id="permitDetailsModal" class="modal">
+
+    <div class="modal-content permit-modal">
+
+        <span class="close" onclick="closePermitModal()">&times;</span>
+
+        <div class="modal-header">
+            <div>
+                <h2 id="permitModalTitle">Application Details</h2>
+                <p id="permitModalSubtitle">Application Tracking & Information</p>
+            </div>
+        </div>
+
+        <div id="permitDetailsBody" class="review-form"></div>
+
+    </div>
+
+</div>
+
+<!-- VIEW SCHEDULE MODAL 
+<div id="viewScheduleModal" class="modal">
+    <div class="modal-content large-modal">
+
+        <span class="close" onclick="closeViewScheduleModal()">&times;</span>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h2>📅 Inspection Details</h2>
+            <span id="viewScheduleStatusBadge" class="status-badge"></span>
+        </div>
+
+        <div class="review-form" id="viewScheduleContent"></div>
+
+    </div>
+</div> -->
+
+<!-- INSPECTION STATUS MODAL -->
+<div class="modal modal-overlay" id="inspectionStatusModal">
+
+    <div class="modal-content permit-modal">
+
+        <span class="close" onclick="closeInspectionStatusModal()">&times;</span>
+
+        <div class="modal-header">
+            <div>
+                <h2 id="permitModalTitle">Application Details</h2>
+                <p id="permitModalSubtitle">Application Tracking & Information</p>
+            </div>
+        </div>
+
+        <div
+            class="modal-body"
+            id="inspectionStatusBody"
+        ></div>
+
+    </div>
+
+</div>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" class="modal">
+
+    <div class="modal-content payment-modal">
+
+        <div id="paymentModalBody"></div>
+
+    </div>
+
+</div>
+
+<!-- CLEARANCE MODAL (APPLICANT) -->
+<div id="clearanceModal" class="modal">
+    <div class="modal-content large-modal">
+        <div id="clearanceModalBody"></div>
+    </div>
+</div>
+
+<!-- REJECTED MODAL (APPLICANT) -->
+<div id="rejectedModal" class="modal">
+    <div class="modal-content large-modal">
+        <div id="rejectedModalBody"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>© 2026 Caloocan e-Permit System | BuildBillEase</p>
+</footer>
+
+<script src="js/applicant-dashboard.js"></script>
+
+</body>
+</html>

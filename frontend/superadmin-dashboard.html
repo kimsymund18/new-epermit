@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Dashboard</title>
+
+    <link rel="stylesheet" href="css/superadmin-dashboard.css">
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+
+    <div class="logo">
+        <img src="assets/cclguicon.png" height="40">
+        <span>BuildBillEase - Super Admin</span>
+    </div>
+
+</header>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-inner">
+
+            <!-- PROFILE -->
+            <div class="profile">
+
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+                <h3 id="userName">Super Admin</h3>
+
+                <div class="role">
+
+                    <div class="role-btn" onclick="toggleDropdown(event)">
+                        <span id="userRole">Super Admin</span> ▼
+                    </div>
+
+                    <div id="dropdownMenu" class="dropdown">
+                        <p onclick="editProfile()">Edit Profile</p>
+                        <p onclick="logout()">Sign Out</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- NAVIGATION -->
+            <ul>
+                <li id="btnDashboard">🏠 Dashboard</li>
+                <li id="btnUsers">👥 Users</li>
+                <li id="btnFiles">📁 Files</li>
+                <li id="btnLogs">📜 Activity Logs</li>
+            </ul>
+
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+        <!-- ========================================= -->
+        <!-- DASHBOARD SECTION -->
+        <!-- ========================================= -->
+        <section id="dashboardSection">
+
+            <h2>System Overview</h2>
+
+            <!-- STATS -->
+            <div class="stats-wrapper">
+
+                <!-- TOP ROW -->
+                <div class="stats-row top-row">
+
+                    <div class="stat-card total-users">
+                        <h4>Total Users</h4>
+                        <p id="totalUsers">0</p>
+                    </div>
+
+                    <div class="stat-card applicants">
+                        <h4>Total Applicants</h4>
+                        <p id="totalApplicants">0</p>
+                    </div>
+
+                    <div class="stat-card staff">
+                        <h4>Total Staff</h4>
+                        <p id="totalStaff">0</p>
+                    </div>
+
+                    <div class="stat-card applications">
+                        <h4>Total Applications</h4>
+                        <p id="totalApplications">0</p>
+                    </div>
+
+                </div>
+
+                <!-- BOTTOM ROW -->
+                <div class="stats-row bottom-row">
+
+                    <div class="stat-card pending">
+                        <h4>Pending</h4>
+                        <p id="pendingApplications">0</p>
+                    </div>
+
+                    <div class="stat-card approved">
+                        <h4>Approved</h4>
+                        <p id="approvedApplications">0</p>
+                    </div>
+
+                    <div class="stat-card rejected">
+                        <h4>Rejected</h4>
+                        <p id="rejectedApplications">0</p>
+                    </div>
+
+                    <div class="stat-card files">
+                        <h4>Total Files</h4>
+                        <p id="totalFiles">0</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RECENT ACTIVITY -->
+            <div class="activity-section">
+
+                <div class="section-header">
+
+                    <div>
+                        <h3>Recent Activity</h3>
+                        <p>Latest actions across the system</p>
+                    </div>
+
+                </div>
+
+                <div id="activityLog" class="activity-list">
+
+                    <!-- JS WILL RENDER -->
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ========================================= -->
+        <!-- USERS SECTION -->
+        <!-- ========================================= -->
+        <section id="usersSection" style="display:none;">
+
+            <h2>User Management</h2>
+
+            <!-- CREATE STAFF -->
+            <div class="form-card">
+
+                <div class="section-header">
+                    <div>
+                        <h3>Create Staff Account</h3>
+                        <p>Add new admins and inspectors</p>
+                    </div>
+                </div>
+
+                <form id="createStaffForm" class="admin-form">
+
+                    <!-- FULL NAME GROUP -->
+                    <div class="form-group full-width">
+                        <label>Full Name</label>
+                        <div class="name-grid">
+                            <input type="text" id="first_name" placeholder="First Name" required>
+                            <input type="text" id="middle_name" placeholder="Middle Name">
+                            <input type="text" id="last_name" placeholder="Last Name" required>
+                        </div>
+                    </div>
+
+                    <!-- CONTACT -->
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="number" id="contact_number" placeholder="09XXXXXXXXX">
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" placeholder="Email Address" required>
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+
+                    <!-- ROLE -->
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select id="role" required>
+                            <option value="">Select Role</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Inspector">Inspector</option>
+                        </select>
+                    </div>
+
+                    <!-- DEPARTMENT -->
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select id="department">
+                            <option value="Other">Other</option>
+                            <option value="OBO">OBO</option>
+                            <option value="Zoning">Zoning</option>
+                            <option value="Fire Safety">Fire Safety</option>
+                        </select>
+                    </div>
+
+                    <!-- BUTTON -->
+                    <div class="form-group full-width">
+                        <button type="submit" class="primary-btn full-btn">
+                            Create Staff Account
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- USERS TABLE -->
+            <div class="table-header">
+
+                <!-- TOP -->
+                <div class="table-header-top">
+
+                    <div>
+                        <h3>User Records</h3>
+                        <p>Manage applicants and staff accounts</p>
+                    </div>
+
+                    <div class="results-count">
+                        <span id="usersCount">0 Users</span>
+                    </div>
+
+                </div>
+
+                <!-- TOOLBAR -->
+                <div class="table-toolbar">
+
+                    <!-- SEARCH -->
+                    <div class="search-box">
+
+                        <span>🔍</span>
+
+                        <input
+                            type="text"
+                            id="userSearchInput"
+                            placeholder="Search users..."
+                        >
+
+                    </div>
+
+                    <!-- FILTER -->
+                    <select id="userRoleFilter">
+                        <option value="">All Roles</option>
+                        <option value="Applicant">Applicant</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Inspector">Inspector</option>
+                    </select>
+
+                    <select id="userStatusFilter">
+                        <option value="">All Status</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>DEPARTMENT</th>
+                            <th>ROLE</th>
+                            <th>STATUS</th>
+                            <th>DATE CREATED</th>
+                            <th>ACTIONS</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="usersTableBody">
+
+                        <!-- JS WILL RENDER -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- ========================================= -->
+        <!-- FILES SECTION -->
+        <!-- ========================================= -->
+        <section id="filesSection" style="display:none;">
+
+            <h2>File Management</h2>
+
+            <!-- HEADER -->
+            <div class="table-header">
+
+                <div class="table-header-top">
+
+                    <div>
+                        <h3>Uploaded Files</h3>
+                        <p>Manage uploaded permit documents</p>
+                    </div>
+
+                    <div class="results-count">
+                        <span id="filesCount">0 Files</span>
+                    </div>
+
+                </div>
+
+                <!-- TOOLBAR -->
+                <div class="table-toolbar">
+
+                    <!-- SEARCH -->
+                    <div class="search-box">
+
+                        <span>🔍</span>
+
+                        <input
+                            type="text"
+                            id="fileSearchInput"
+                            placeholder="Search files..."
+                        >
+
+                    </div>
+
+                    <!-- FILTERS -->
+                    <select id="filePermitFilter">
+                        <option value="">Permit Type</option>
+                        <option value="Building Permit">Building Permit</option>
+                        <option value="Zoning Clearance">Zoning Clearance</option>
+                        <option value="Fire Safety Evaluation Clearance">
+                            Fire Safety
+                        </option>
+                    </select>
+
+                    <select id="fileStatusFilter">
+                        <option value="">File Status</option>
+                        <option value="Verified">Verified</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- FILES TABLE -->
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>FILE NAME</th>
+                            <th>UPLOADED BY</th>
+                            <th>PERMIT TYPE</th>
+                            <th>DATE UPLOADED</th>
+                            <th>STATUS</th>
+                            <th>ACTIONS</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="filesTableBody">
+
+                        <!-- JS WILL RENDER -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- ========================================= -->
+        <!-- ACTIVITY LOGS SECTION -->
+        <!-- ========================================= -->
+        <section id="logsSection" style="display:none;">
+
+            <h2>System Activity Logs</h2>
+
+            <div class="table-header">
+
+                <div class="table-header-top">
+
+                    <div>
+                        <h3>Audit Trail</h3>
+                        <p>Track all system activities</p>
+                    </div>
+
+                    <div class="results-count">
+                        <span id="logsCount">0 Logs</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- LOG TABLE -->
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>USER</th>
+                            <th>ACTION</th>
+                            <th>MODULE</th>
+                            <th>DATE & TIME</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="logsTableBody">
+
+                        <!-- JS WILL RENDER -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- ========================================= -->
+<!-- USER DETAILS MODAL -->
+<!-- ========================================= -->
+<div id="userModal" class="modal">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2>User Details</h2>
+            <p>View and manage user account information</p>
+
+            <span class="close" onclick="closeUserModal()">&times;</span>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="modal-section">
+
+                <h3>Account Information</h3>
+
+                <div class="info-grid">
+
+                    <div class="field">
+                        <label>Full Name</label>
+                        <div class="static-value" id="modalFullName"></div>
+                    </div>
+
+                    <div class="field">
+                        <label>Email</label>
+                        <div class="static-value" id="modalEmail"></div>
+                    </div>
+
+                    <div class="field">
+                        <label>Role</label>
+                        <div class="static-value" id="modalRole"></div>
+                    </div>
+
+                    <div class="field">
+                        <label>Status</label>
+
+                        <div
+                            class="user-status"
+                            id="modalStatus"
+                        ></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    class="secondary-btn"
+                    onclick="closeUserModal()"
+                >
+                    Close
+                </button>
+
+                <button
+                    class="danger-btn"
+                    id="toggleUserBtn"
+                >
+                    Deactivate User
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- ========================================= -->
+<!-- FILE PREVIEW MODAL -->
+<!-- ========================================= -->
+<div id="fileModal" class="modal">
+
+    <div class="modal-content large-modal">
+
+        <span class="close" onclick="closeFileModal()">&times;</span>
+
+        <div class="modal-header">
+
+            <div>
+                <h2>File Preview</h2>
+                <p>Document viewer</p>
+            </div>
+
+        </div>
+
+        <div id="filePreviewBody">
+
+            <!-- JS WILL RENDER -->
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2026 Caloocan e-Permit System | BuildBillEase</p>
+</footer>
+
+<!-- JS -->
+<script src="js/superadmin-dashboard.js"></script>
+
+</body>
+</html>

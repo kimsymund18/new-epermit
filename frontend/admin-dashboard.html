@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+    <div class="logo">
+        <img src="assets/cclguicon.png" height="40">
+        <span>BuildBillEase - Admin Panel</span>
+    </div>
+</header>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-inner">
+
+    <!-- PROFILE -->
+    <div class="profile">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+        <div class="profile-info">
+
+            <h3 id="adminName">
+                Administrator
+            </h3>
+
+            <small id="adminDepartment">
+                Department
+            </small>
+
+            <div class="role">
+
+                <div
+                    class="role-btn"
+                    onclick="toggleDropdown(event)"
+                >
+                    <span id="adminRole">
+                        Admin
+                    </span> ▼
+                </div>
+
+                <div id="dropdownMenu" class="dropdown">
+
+                    <p onclick="editProfile()">
+                        Edit Profile
+                    </p>
+
+                    <p onclick="logout()">
+                        Sign Out
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+            <!-- NAVIGATION -->
+            <ul>
+                <li id="btnDashboard">🏠 Dashboard</li>
+                <li id="btnApplications">📋 Applications</li>
+                <li id="btnRequirements">📄 Requirements</li>
+                <li id="btnHistory">📁 Application History</li>
+            </ul>
+
+        </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+        <!-- DASHBOARD SECTION -->
+        <section id="dashboardSection">
+
+            <h2>Dashboard Overview</h2>
+
+            <!-- RECENT APPLICATIONS -->
+            <div class="activity-section">
+
+                <div class="section-header">
+                    <div>
+                        <h3>Recent Applications</h3>
+                        <p>Latest submitted permit applications</p>
+                    </div>
+                </div>
+
+                <div id="recentApplications" class="activity-list">
+
+                    <!-- JS RENDER -->
+
+                </div>
+
+            </div>
+
+            <!-- RECENT RESUBMISSIONS -->
+            <div class="activity-section">
+
+                <div class="section-header">
+
+                    <div>
+                        <h3>Recent Resubmissions</h3>
+
+                        <p>
+                            Recently resubmitted documents
+                        </p>
+                    </div>
+
+                </div>
+
+                <div
+                    id="recentResubmissions"
+                    class="activity-list"
+                >
+
+                    <!-- JS RENDER -->
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- APPLICATIONS SECTION -->
+        <section id="applicationsSection" style="display:none;">
+
+            <h2>Applications Management</h2>
+
+            <!-- STATS -->
+            <div class="stats-wrapper">
+
+                <div class="stats-row">
+
+                    <div class="stat-card total">
+                        <h4>Total Applications</h4>
+                        <p id="totalApplications">0</p>
+                    </div>
+
+                    <div class="stat-card pending">
+                        <h4>Pending</h4>
+                        <p id="pendingApplications">0</p>
+                    </div>
+
+                    <div class="stat-card review">
+                        <h4>Under Review</h4>
+                        <p id="underReviewApplications">0</p>
+                    </div>
+
+                    <div class="stat-card approved">
+                        <h4>Approved</h4>
+                        <p id="approvedApplications">0</p>
+                    </div>
+
+                    <div class="stat-card rejected">
+                        <h4>Rejected</h4>
+                        <p id="rejectedApplications">0</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TABLE HEADER -->
+            <div class="table-header">
+
+                <div class="table-header-top">
+
+                    <div>
+                        <h3>Permit Applications</h3>
+                        <p>Review and manage all permit applications</p>
+                    </div>
+
+                    <div class="results-count">
+                        <span id="resultsCount">0 Applications</span>
+                    </div>
+
+                </div>
+
+                <!-- TOOLBAR -->
+                <div class="table-toolbar">
+
+                    <!-- SEARCH -->
+                    <div class="search-box">
+                        <span>🔍</span>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search applications..."
+                        >
+                    </div>
+
+                    <!-- STATUS FILTER -->
+                    <select id="statusFilter">
+                        <option value="">Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Under Review">Under Review</option>
+                        <option value="For Inspection">For Inspection</option>
+                        <option value="For Payment">For Payment</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+
+                    <!-- PERMIT FILTER -->
+                    <select id="permitFilter">
+                        <option value="">Permit Type</option>
+                        <option value="Building Permit">Building Permit</option>
+                        <option value="Zoning Clearance">Zoning Clearance</option>
+                        <option value="Fire Safety Evaluation Clearance">
+                            Fire Safety
+                        </option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>CONTROL NUMBER</th>
+                            <th>APPLICANT</th>
+                            <th>PERMIT TYPE</th>
+                            <th>PROJECT TITLE</th>
+                            <th>DATE SUBMITTED</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="applicationsTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- REQUIREMENTS SECTION -->
+        <section id="requirementsSection" style="display:none;">
+
+            <h2>Permit Requirements</h2>
+
+            <div
+                id="requirementsContainer"
+                class="requirements-grid"
+            ></div>
+
+        </section>
+
+        <!-- APPLICATION HISTORY SECTION -->
+        <section id="historySection" style="display:none;">
+            <h2>Application History</h2>
+
+            <div class="stats-wrapper">
+                <div class="stats-row">
+                    <div class="stat-card total">
+                        <h4>Total Completed</h4>
+                        <p id="adminHistoryTotal">0</p>
+                    </div>
+                    <div class="stat-card approved">
+                        <h4>Approved</h4>
+                        <p id="adminHistoryApproved">0</p>
+                    </div>
+                    <div class="stat-card rejected">
+                        <h4>Rejected</h4>
+                        <p id="adminHistoryRejected">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-header">
+                <div class="table-header-top">
+                    <div>
+                        <h3>Completed Applications</h3>
+                        <p>All approved and rejected permit applications</p>
+                    </div>
+                    <div class="results-count">
+                        <span id="adminHistoryCount">0 Records</span>
+                    </div>
+                </div>
+                <div class="table-toolbar">
+                    <div class="search-box">
+                        <span>🔍</span>
+                        <input type="text" id="adminHistorySearch" placeholder="Search records...">
+                    </div>
+                    <select id="adminHistoryResultFilter">
+                        <option value="">Result</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                    <select id="adminHistoryPermitFilter">
+                        <option value="">Permit Type</option>
+                        <option value="Building Permit">Building Permit</option>
+                        <option value="Zoning Clearance">Zoning Clearance</option>
+                        <option value="Fire Safety Evaluation Clearance">Fire Safety</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CONTROL NUMBER</th>
+                            <th>APPLICANT</th>
+                            <th>PERMIT TYPE</th>
+                            <th>PROJECT TITLE</th>
+                            <th>DATE SUBMITTED</th>
+                            <th>RESULT</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminHistoryTable"></tbody>
+                </table>
+                <div id="adminHistoryEmpty" class="empty-state" style="display:none; text-align:center; padding:30px;">
+                    <h3>📂 No Completed Applications Yet</h3>
+                    <p>Approved and rejected applications will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+<div id="adminPermitModal" class="modal">
+
+    <div class="modal-content large-modal">
+
+        <span class="close" onclick="closeAdminPermitModal()">
+            &times;
+        </span>
+
+        <div id="adminPermitModalBody"></div>
+
+    </div>
+
+</div>
+
+<div id="inspectionModal" class="modal">
+    <div class="modal-content" id="inspectionModalBody"></div>
+</div>
+
+<div id="paymentModal" class="modal">
+
+    <div class="modal-content">
+
+        <div id="paymentModalBody"></div>
+
+    </div>
+
+</div>
+
+<!-- CLEARANCE MODAL (ADMIN) -->
+<div id="clearanceModal" class="modal">
+    <div class="modal-content large-modal">
+        <div id="clearanceModalBody"></div>
+    </div>
+</div>
+
+<!-- REJECTED MODAL (ADMIN) -->
+<div id="rejectedModal" class="modal">
+    <div class="modal-content large-modal">
+        <div id="rejectedModalBody"></div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2026 Caloocan e-Permit System | BuildBillEase</p>
+</footer>
+
+<script src="js/admin-dashboard.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Staff Login | e-Permit System</title>
+
+<!-- BOOTSTRAP -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- ICONS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<!-- GOOGLE FONT (match index) -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- CUSTOM CSS -->
+<link rel="stylesheet" href="css/staff-login.css">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR (MATCH INDEX STYLE) ================= -->
+<nav class="navbar navbar-expand-lg custom-navbar">
+  <div class="container">
+
+    <a class="navbar-brand" href="index.html">
+      <img src="assets/cclguicon.png" width="32">
+      <strong>BuildBillEase</strong>
+    </a>
+
+    <div class="ms-auto">
+      <a href="index.html" class="nav-link active-nav">
+        <i class="fa-solid fa-arrow-left"></i> Back to Home
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ================= LOGIN WRAPPER ================= -->
+<div class="login-wrapper">
+
+    <!-- LEFT SIDE -->
+    <div class="brand-side">
+        <div class="brand-overlay"></div>
+
+        <div class="brand-content">
+            <h1>
+                Staff Portal
+                <span>e-Permit System</span>
+            </h1>
+
+            <p>
+                Secure access for government staff and administrators.
+            </p>
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="login-side">
+
+        <div class="login-card">
+
+            <h2>Staff Login</h2>
+            <p class="subtitle">Enter your credentials to continue</p>
+
+            <form id="loginForm">
+
+                <!-- EMAIL -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <input type="email" id="login_email" class="form-control" placeholder="Email" required>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="input-group mb-3 position-relative">
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-lock"></i>
+                    </span>
+
+                    <input type="password" id="login_password" class="form-control" placeholder="Password" required>
+
+                    <span class="toggle-password" onclick="togglePassword(event)">
+                        <i class="fa-solid fa-eye"></i>
+                    </span>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    Login
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="auth-footer">
+  <div class="container text-center">
+    <p>© 2026 Caloocan City e-Permit System</p>
+    <small>Secure Staff Access Portal</small>
+  </div>
+</footer>
+
+<script src="js/staff-login.js"></script>
+
+</body>
+</html>
