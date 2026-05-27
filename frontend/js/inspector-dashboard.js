@@ -4,7 +4,7 @@ let currentInspection = null;
 let optionalVisible = false;
 
 const API_URL =
-    "http://localhost:5000/api";
+    "https://new-epermit-backend.onrender.com/api";
 
 const token =
     localStorage.getItem("token");

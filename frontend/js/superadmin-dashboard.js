@@ -150,7 +150,7 @@ async function loadApplications() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/permits/all-permits",
+            "https://new-epermit-backend.onrender.com/api/permits/all-permits",
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -259,7 +259,7 @@ document.addEventListener("submit", async (e) => {
     try {
 
         const res = await fetch(
-            "http://localhost:5000/api/users/create-staff",
+            "https://new-epermit-backend.onrender.com/api/users/create-staff",
             {
                 method: "POST",
                 headers: {
@@ -295,7 +295,7 @@ async function loadUsers() {
     try {
 
         const res = await fetch(
-            "http://localhost:5000/api/users/all-users",
+            "https://new-epermit-backend.onrender.com/api/users/all-users",
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -483,7 +483,7 @@ async function updateUserStatus(userId, status) {
     try {
 
         const res = await fetch(
-            `http://localhost:5000/api/users/update-status/${userId}`,
+            `https://new-epermit-backend.onrender.com/api/users/update-status/${userId}`,
             {
                 method: "PUT",
                 headers: {

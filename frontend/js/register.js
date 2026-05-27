@@ -23,7 +23,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
     console.log(data);
 
-    const response = await fetch("http://localhost:5000/api/auth/register", {
+    const response = await fetch("https://new-epermit-backend.onrender.com/api/auth/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

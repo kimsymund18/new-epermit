@@ -188,7 +188,7 @@ loginForm.addEventListener(
             };
 
             const response = await fetch(
-                "http://localhost:5000/api/auth/login",
+                "https://new-epermit-backend.onrender.com/api/auth/login",
                 {
                     method: "POST",
                     headers: {
@@ -345,7 +345,7 @@ registerForm.addEventListener(
             };
 
             const response = await fetch(
-                "http://localhost:5000/api/auth/register",
+                "https://new-epermit-backend.onrender.com/api/auth/register",
                 {
                     method: "POST",
                     headers: {

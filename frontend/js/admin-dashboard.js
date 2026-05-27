@@ -136,7 +136,7 @@ async function loadAdminProfile() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/users/me",
+            "https://new-epermit-backend.onrender.com/api/users/me",
             {
                 headers: {
                     Authorization:
@@ -211,7 +211,7 @@ async function loadApplications() {
         const token = localStorage.getItem("token");
 
         const response = await fetch(
-            "http://localhost:5000/api/permits/all-permits",
+            "https://new-epermit-backend.onrender.com/api/permits/all-permits",
             {
                 method: "GET",
                 headers: {
@@ -254,7 +254,7 @@ async function loadRecentActivities() {
         const token = localStorage.getItem("token");
 
         const response = await fetch(
-            "http://localhost:5000/api/permits/activities/recent",
+            "https://new-epermit-backend.onrender.com/api/permits/activities/recent",
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -651,7 +651,7 @@ function renderRequirementsSection() {
 async function loadAdminApplicationHistory() {
     try {
         const response = await fetch(
-            "http://localhost:5000/api/permits/history",
+            "https://new-epermit-backend.onrender.com/api/permits/history",
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -748,7 +748,7 @@ try {
     currentPermitId = permitId;
 
     const response = await fetch(
-        `http://localhost:5000/api/permits/${permitId}`,
+        `https://new-epermit-backend.onrender.com/api/permits/${permitId}`,
         {
             headers: {
                 Authorization:
@@ -1028,7 +1028,7 @@ try {
 async function openInspectionModal(permitId) {
     try {
         const response = await fetch(
-            `http://localhost:5000/api/permits/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/permits/${permitId}`,
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -1336,7 +1336,7 @@ async function openPaymentModal(permitId) {
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/payments/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/payments/${permitId}`,
             {
                 headers: {
                     Authorization:
@@ -1944,7 +1944,7 @@ function buildPaymentModal(permit, payment) {
                                                 <div class="document-actions">
 
                                                     <a
-                                                        href="http://localhost:5000${payment.receipt_path}"
+                                                        href="https://new-epermit-backend.onrender.com${payment.receipt_path}"
                                                         target="_blank"
                                                         class="view-btn"
                                                     >
@@ -2183,7 +2183,7 @@ async function submitAssessment(
             );
 
         const response = await fetch(
-            `http://localhost:5000/api/payments/assessment/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/payments/assessment/${permitId}`,
             {
                 method: "POST",
 
@@ -2416,7 +2416,7 @@ async function confirmPaymentApproval(
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/payments/verify/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/payments/verify/${permitId}`,
             {
                 method: "POST",
 
@@ -2481,7 +2481,7 @@ async function confirmPaymentRejection(
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/payments/verify/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/payments/verify/${permitId}`,
             {
                 method: "POST",
 
@@ -2545,7 +2545,7 @@ async function updatePermitOnlyStatus(
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/permits/update-status/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/permits/update-status/${permitId}`,
             {
                 method: "PUT",
 
@@ -2586,7 +2586,7 @@ async function updatePermitOnlyStatus(
 async function loadInspectionInspectors() {
     try {
         const response = await fetch(
-            "http://localhost:5000/api/permits/inspectors",
+            "https://new-epermit-backend.onrender.com/api/permits/inspectors",
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -2638,7 +2638,7 @@ async function confirmInspectionAssignment(permitId) {
 
     try {
         const response = await fetch(
-            `http://localhost:5000/api/permits/assign-inspector/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/permits/assign-inspector/${permitId}`,
             {
                 method: "POST",
                 headers: {
@@ -2752,7 +2752,7 @@ return documents.map(doc => `
             <div class="document-actions">
 
                 <a
-                    href="http://localhost:5000/${doc.file_path}"
+                    href="https://new-epermit-backend.onrender.com/${doc.file_path}"
                     target="_blank"
                     class="view-btn"
                 >
@@ -3069,7 +3069,7 @@ async function submitInlineInspectorAssignment(
         if (documentChanges.length > 0) {
 
             const reviewResponse = await fetch(
-                `http://localhost:5000/api/permits/review-documents/${permitId}`,
+                `https://new-epermit-backend.onrender.com/api/permits/review-documents/${permitId}`,
                 {
                     method: "PUT",
 
@@ -3104,7 +3104,7 @@ async function submitInlineInspectorAssignment(
         // ===================================
 
         const response = await fetch(
-            `http://localhost:5000/api/permits/assign-inspector/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/permits/assign-inspector/${permitId}`,
             {
                 method: "POST",
 
@@ -3155,7 +3155,7 @@ async function loadInlineInspectors(
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/permits/inspectors/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/permits/inspectors/${permitId}`,
             {
                 headers: {
                     Authorization:
@@ -3337,7 +3337,7 @@ async function updatePermitStatusDirect(permitId, permitStatus = null) {
             });
 
         const response = await fetch(
-            `http://localhost:5000/api/permits/review-documents/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/permits/review-documents/${permitId}`,
             {
                 method: "PUT",
                 headers: {
@@ -3625,7 +3625,7 @@ async function updateDocumentStatus(documentId, status) {
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/permits/document-status/${documentId}`,
+            `https://new-epermit-backend.onrender.com/api/permits/document-status/${documentId}`,
             {
                 method: "PUT",
 
@@ -3690,7 +3690,7 @@ async function updatePermitStatus(permitId) {
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/permits/update-status/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/permits/update-status/${permitId}`,
             {
                 method: "PUT",
 
@@ -3791,7 +3791,7 @@ async function loadRecentResubmissions() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/permits/recent-resubmissions",
+            "https://new-epermit-backend.onrender.com/api/permits/recent-resubmissions",
             {
                 headers: {
                     Authorization:

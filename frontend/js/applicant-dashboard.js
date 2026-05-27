@@ -291,7 +291,7 @@ function renderRequirements() {
 async function loadApplicationHistory() {
     try {
         const response = await fetch(
-            "http://localhost:5000/api/permits/my-permits/history",
+            "https://new-epermit-backend.onrender.com/api/permits/my-permits/history",
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -1091,7 +1091,7 @@ async function submitApplication(type) {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/permits/submit",
+            "https://new-epermit-backend.onrender.com/api/permits/submit",
             {
                 method: "POST",
                 headers: {
@@ -1135,7 +1135,7 @@ async function loadMyPermits() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/permits/my-permits",
+            "https://new-epermit-backend.onrender.com/api/permits/my-permits",
             {
                 headers: {
                     Authorization:
@@ -1796,7 +1796,7 @@ async function loadApplicantActivities() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/inspections/applicant",
+            "https://new-epermit-backend.onrender.com/api/inspections/applicant",
             {
                 headers: {
                     Authorization:
@@ -1835,7 +1835,7 @@ function openPermitModal(permitId) {
     existingDocuments = {};
     pendingDocuments = {};
 
-    fetch(`http://localhost:5000/api/permits/${permitId}`, {
+    fetch(`https://new-epermit-backend.onrender.com/api/permits/${permitId}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -1969,7 +1969,7 @@ function openPermitModal(permitId) {
                                         <div class="document-actions">
 
                                             <a
-                                                href="http://localhost:5000/${doc.file_path}"
+                                                href="https://new-epermit-backend.onrender.com/${doc.file_path}"
                                                 target="_blank"
                                                 class="view-btn"
                                             >
@@ -2111,7 +2111,7 @@ function openPermitModal(permitId) {
                                         <div class="document-actions">
 
                                             <a
-                                                href="http://localhost:5000/${doc.file_path}"
+                                                href="https://new-epermit-backend.onrender.com/${doc.file_path}"
                                                 target="_blank"
                                                 class="view-btn"
                                             >
@@ -2228,7 +2228,7 @@ function openPermitModal(permitId) {
                                         existingDoc
                                         ? `
                                             <a
-                                                href="http://localhost:5000/${existingDoc.file_path}"
+                                                href="https://new-epermit-backend.onrender.com/${existingDoc.file_path}"
                                                 target="_blank"
                                                 class="view-btn"
                                             >
@@ -2390,7 +2390,7 @@ function openPermitModal(permitId) {
 
 function openUnderReviewModal(permitId) {
 
-    fetch(`http://localhost:5000/api/permits/${permitId}`, {
+    fetch(`https://new-epermit-backend.onrender.com/api/permits/${permitId}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -2717,7 +2717,7 @@ function buildReviewDocuments(documents, allowResubmit = false) {
                     <div class="document-actions">
 
                         <a
-                            href="http://localhost:5000/${doc.file_path}"
+                            href="https://new-epermit-backend.onrender.com/${doc.file_path}"
                             target="_blank"
                             class="view-btn"
                         >
@@ -2973,7 +2973,7 @@ async function submitReuploadedDocuments(permitId) {
             );
 
             const response = await fetch(
-                `http://localhost:5000/api/permits/upload-document/${permitId}`,
+                `https://new-epermit-backend.onrender.com/api/permits/upload-document/${permitId}`,
                 {
                     method: "POST",
                     headers: {
@@ -3043,7 +3043,7 @@ function formatTime(timeString) {
 function openInspectionStatusModal(permitId) {
 
     fetch(
-        `http://localhost:5000/api/permits/${permitId}/inspection`,
+        `https://new-epermit-backend.onrender.com/api/permits/${permitId}/inspection`,
         {
             headers: {
                 Authorization:
@@ -3589,7 +3589,7 @@ function renderPermitDocumentCard(key, label) {
 
         actions.innerHTML = `
             <a
-                href="http://localhost:5000/${data.filePath}"
+                href="https://new-epermit-backend.onrender.com/${data.filePath}"
                 target="_blank"
                 class="view-btn"
             >
@@ -3947,7 +3947,7 @@ function buildApplicantPaymentModal(payment) {
 
                                     ${payment.receipt_path ? `
                                         <a
-                                            href="http://localhost:5000${payment.receipt_path}"
+                                            href="https://new-epermit-backend.onrender.com${payment.receipt_path}"
                                             target="_blank"
                                             class="view-btn"
                                         >
@@ -4159,7 +4159,7 @@ async function submitApplicantPayment(permitId) {
         );
 
         const response = await fetch(
-            `http://localhost:5000/api/payments/submit/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/payments/submit/${permitId}`,
             {
                 method: "POST",
 
@@ -4200,7 +4200,7 @@ async function submitApplicantPayment(permitId) {
 async function openApplicantPaymentModal(permitId) {
     try {
         const response = await fetch(
-            `http://localhost:5000/api/payments/${permitId}`,
+            `https://new-epermit-backend.onrender.com/api/payments/${permitId}`,
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -4428,7 +4428,7 @@ async function uploadDynamicDocuments(permitId, permitType) {
             formData.append("document_name", data.documentName);
 
             const response = await fetch(
-                `http://localhost:5000/api/permits/upload-document/${permitId}`,
+                `https://new-epermit-backend.onrender.com/api/permits/upload-document/${permitId}`,
                 {
                     method: "POST",
                     headers: {
@@ -4567,7 +4567,7 @@ function viewDocument(key) {
     if (data?.existing) {
 
         window.open(
-            `http://localhost:5000/${data.filePath}`,
+            `https://new-epermit-backend.onrender.com/${data.filePath}`,
             "_blank"
         );
 

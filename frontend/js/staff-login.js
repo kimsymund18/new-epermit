@@ -19,7 +19,7 @@ document.getElementById("loginForm")
         loginBtn.innerText = "Logging in...";
 
         const response = await fetch(
-            "http://localhost:5000/api/auth/login",
+            "https://new-epermit-backend.onrender.com/api/auth/login",
             {
                 method: "POST",
                 headers: {
