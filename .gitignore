@@ -1,0 +1,5 @@
+node_modules/
+uploads/
+.env
+backup.sql
+backup_clean.sql
